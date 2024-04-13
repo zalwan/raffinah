@@ -1,42 +1,49 @@
-name: Deploy
+name: ci
+
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
-    branches: main
+    branches:
+      - main
 
 jobs:
   deploy:
-    name: Deploy
+    name: deploy
     runs-on: ubuntu-latest
-
     permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+      id-token: write
+      contents: read
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Install Deno
-        uses: denoland/setup-deno@v1
+      - name: Install Node
+        uses: actions/setup-node@v2
         with:
-          deno-version: v1.x
+          node-version: 16
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
         with:
-          node-version: lts/*
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
 
-      - name: Install step
-        run: "npm install"
+      - name: Install pnpm and node_modules
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: true
 
-      - name: Build step
-        run: "npm run build"
+      - name: Build site
+        run: pnpm build
 
-      - name: Upload to Deno Deploy
+      - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "raffinah"
-          entrypoint: "mod.ts"
-          root: "build"
+          project: "raffinah" # Replace with your project name
+          entrypoint: 'build/index.js'

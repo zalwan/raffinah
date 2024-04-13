@@ -6,13 +6,13 @@
 	<div class="modal" class:modal-open={isModalOpen}>
 		<div class="modal-box bg-transparent text-center text-white">
 			<h3 class=" text-xl capitalize italic font-tangerine">the wedding of</h3>
-			<div class=" flex justify-center text-6xl items-center gap-x-5">
+			<div class=" flex justify-center text-6xl items-center gap-x-5 font-sedan">
 				<p class="py-4 text-3xl font-bold">
-					Rafiudin <br /><span class="italic font-light text-xl"> ( Raffi ) </span>
+					Rafiudin <br /><span class="italic font-light text-xl font-normal"> ( Raffi ) </span>
 				</p>
 				&
 				<p class="py-4 text-3xl font-bold">
-					Jumainah <br /><span class="italic font-light text-xl"> ( Inah ) </span>
+					Jumainah <br /><span class="italic font-light text-xl font-normal"> ( Inah ) </span>
 				</p>
 			</div>
 			<div class="modal-action justify-center items-center">

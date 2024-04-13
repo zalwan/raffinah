@@ -5,7 +5,8 @@ export default {
 		extend: {
 			fontFamily: {
 				tangerine: ['Tangerine', 'cursive'],
-				sedan: ['Sedan', 'serif']
+				sedan: ['Sedan', 'serif'],
+				coget: ['Courgette', 'cursive']
 			}
 		}
 	},
